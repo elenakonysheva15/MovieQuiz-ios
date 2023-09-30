@@ -98,7 +98,7 @@ final class MovieQuizViewController: UIViewController {
         // строка с порядковым номером этого вопроса (ex. "1/10")
         let questionNumber: String
     }
-    // приватный метод конвертации, который принимает моковый вопрос и возвращает вью модель для главного экрана
+    // приватный метод конвертации
     private func convert(model: QuizQuestion) -> QuizStepViewModel {
         let questionStep = QuizStepViewModel(
             image: UIImage(named: model.image) ?? UIImage(),
@@ -106,14 +106,13 @@ final class MovieQuizViewController: UIViewController {
             questionNumber: "\(currentQuestionIndex + 1)/\(questions.count)")
         return questionStep
     }
-    // приватный метод вывода на экран вопроса, который принимает на вход вью модель вопроса и ничего не возвращает
+    // приватный метод вывода на экран вопроса
     private func show(quizStep: QuizStepViewModel) {
         imageView.image = quizStep.image
         textLabel.text = quizStep.question
         counterLabel.text = quizStep.questionNumber
     }
     // приватный метод, который меняет цвет рамки
-    // принимает на вход булевое значение и ничего не возвращает
     private func showAnswerResult(isCorrect: Bool) {
         if isCorrect {
         correctAnswers += 1
@@ -127,7 +126,6 @@ final class MovieQuizViewController: UIViewController {
         }
     }
     // приватный метод, который содержит логику перехода в один из сценариев
-    // метод ничего не принимает и ничего не возвращает
     private func showNextQuestionOrResults() {
         if currentQuestionIndex == questions.count - 1 { // 1
             let alert = UIAlertController(
@@ -135,7 +133,7 @@ final class MovieQuizViewController: UIViewController {
                 message: "Ваш результат \(correctAnswers)/\(questions.count)",
                 preferredStyle: .alert)
 
-            let action = UIAlertAction(title: "Сыграть ещё раз", style: .default) { _ in
+            let action = UIAlertAction(title: "Сыграть еще раз", style: .default) { _ in
                 self.currentQuestionIndex = 0
                 self.correctAnswers = 0
                 
